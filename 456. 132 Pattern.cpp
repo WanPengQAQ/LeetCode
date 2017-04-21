@@ -19,3 +19,19 @@ public:
         return false;
     }
 };
+
+/* better solution O(n^2)*/
+class Solution {
+public:
+    bool find132pattern(vector<int>& nums) {
+        int minNum = 0x7fffffff;
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] < minNum)
+                minNum = nums[i];
+            for(int j = i + 1; j < nums.size(); j++)
+                if(minNum < nums[j] && nums[i] > nums[j])
+                    return true;
+        }
+        return false;
+    }
+};
