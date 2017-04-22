@@ -19,3 +19,32 @@ public:
         return num;
     }
 };
+/*use stack*/
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        string result = "";
+        stack<char> s;
+        for (int i = 0; i < num.size(); i++) {
+            while (k > 0 && !s.empty() && s.top() > num[i]) {
+                k--;
+                s.pop();
+            }
+            s.push(num[i]);
+        }
+        while (k > 0 && !s.empty()) {
+            k--;
+            s.pop();
+        }
+        while (!s.empty()) {
+            result = s.top() + result;
+            s.pop();
+        }
+        int index = 0;
+        while (result[index] == '0') index++;
+        result = result.substr(index);
+        if (result == "") return "0";
+        return result;
+        
+    }
+};
